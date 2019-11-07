@@ -8,6 +8,7 @@ var gulp          = require('gulp'),
 		svgSprite 		= require("gulp-svg-sprite"),
 		minify				= require("gulp-csso"),
 		replace 			= require("gulp-replace"),
+		prettyHtml 		= require("gulp-pretty-html"),
 		cheerio 			= require("gulp-cheerio"),
 	  rename 				= require("gulp-rename"),
 		del           = require('del'),
@@ -80,6 +81,11 @@ gulp.task('js', function() {
 
 gulp.task('html', function(){
   return gulp.src('app/*.html')
+  .pipe(prettyHtml({
+			indent_size: 2,
+			indent_char: ' ',
+			unformatted: ['code', 'pre', 'em', 'strong', 'span', 'i', 'b', 'br']
+		}))
  	.pipe(browserSync.stream());
 });
 
